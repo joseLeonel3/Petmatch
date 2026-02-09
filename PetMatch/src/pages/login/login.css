@@ -1,0 +1,33 @@
+#loginGrade {
+    border: solid red 1px;
+    display: flex;
+    justify-content: center;
+    height: 580px;
+    align-items: center;
+}
+
+#gradeLogin{
+    padding: 50px;
+    background-color: aliceblue;
+    margin-right: 100px;
+    border-radius: 10px;
+    -webkit-box-shadow: 5px 4px 19px 2px rgba(0,0,0,0.34); 
+    box-shadow: 5px 4px 19px 2px rgba(0,0,0,0.34);
+}
+
+#corsinha{
+    color: blue;
+}
+
+#Patinha{
+    margin-right: auto;
+    margin-top: 200px;
+
+}
+
+#Bolinha{
+    margin-left: auto;
+    margin-bottom: 300px;
+    
+
+}
