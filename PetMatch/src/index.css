@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: 'SfPro';
+  src: url('../src/images/SF-Pro.dmg') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  width: 100%;
+  background-color: #FFF1E6;
+  font-family: SfPro, sans-serif;
+}
+
+

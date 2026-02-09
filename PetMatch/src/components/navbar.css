@@ -1,0 +1,34 @@
+#navbar_container{
+    display: flex;
+    align-items: center;
+    background-color: #BDEBD4;
+}
+ul {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: auto;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: auto;
+}
+
+li {
+    text-decoration: none;
+    list-style: none;
+    padding: 10px 30px; 
+}
+
+#home{
+    color: black;
+    margin-left: 10px;
+}
+
+#logo{
+    height: 100px;
+    margin-top: 4px;
+}
