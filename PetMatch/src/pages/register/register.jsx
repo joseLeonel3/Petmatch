@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../register/register.css";
 import { useRegister } from "../../hooks/useRegister";
+import { Timestamp } from "firebase/firestore";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -46,11 +47,21 @@ const Register = () => {
     return;
   }
 
+  if (!perfilPet) {
+  setError("Selecione se você possui pet ou não.");
+  return;
+  }
+
+  if (!birthDate) {
+    setError("Informe sua data de nascimento.");
+    return;
+  }
+
   const result = await registerUser({
     email,
     password,
     perfilPet,
-    birthDate,
+    birthDate: Timestamp.fromDate(birthDate),
     nome
   });
 
@@ -125,8 +136,8 @@ const Register = () => {
         </Box>
 
         <Box sx={{ display: "flex", gap: 2 }} required>
-          <FormControl sx={{ flex: 1 }}>
-            <FormLabel>Perfil de Adoção</FormLabel>
+          <FormControl sx={{ flex: 1 }} error={!perfilPet && !!error}>
+            <FormLabel required>Perfil de Adoção</FormLabel>
             <RadioGroup onChange={(e) => setPerfilPet(e.target.value)}>
               <FormControlLabel value="possui" control={<Radio />} label="Possui pet" />
               <FormControlLabel value="nao_possui" control={<Radio />} label="Não possui pet" />
@@ -135,11 +146,17 @@ const Register = () => {
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              required
               label="Data de Nascimento"
               value={birthDate}
               onChange={(newValue) => setBirthDate(newValue)}
-              renderInput={(params) => <TextField {...params} fullWidth />}
+              slotProps={{
+                textField: {
+                  required: true,
+                  error: !birthDate && !!error,
+                  helperText: !birthDate && !!error ? "Data obrigatória" : "",
+                  fullWidth: false
+                }
+              }}
             />
           </LocalizationProvider>
         </Box>

@@ -1,14 +1,62 @@
-import { auth } from "../../data/firebaseConfig";
+import "../perfil/perfil.css";
+import { useEffect, useState } from "react";
+import { auth, db } from "../../data/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const Perfil = () => {
   const user = auth.currentUser;
 
-  return (
-    <div>
-      <h1>Perfil</h1>
-      <p>Email: {user?.email}</p>
-      <p>nome: {user?.displayName}</p>
+  const [idade, setIdade] = useState(null);
 
+  const calcularIdade = (birthDate) => {
+    const nascimento = birthDate.toDate();
+
+    const hoje = new Date();
+
+    let idadeCalc = hoje.getFullYear() - nascimento.getFullYear();
+    const mes = hoje.getMonth() - nascimento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idadeCalc--;
+    }
+
+    setIdade(idadeCalc);
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!user) return;
+
+      const docRef = doc(db, "users", user.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        if (data.birthDate) {
+          calcularIdade(data.birthDate);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
+
+  return (
+    <div id="perfil_grade">
+      <div id="info_perfil">
+        <div id="perfil_img">
+          <h1>Perfil</h1>
+        </div>
+
+        <h3>{user?.displayName}</h3>
+        <br />
+        {idade !== null && (
+          <p>
+            Idade: <strong>{idade} anos</strong>
+          </p>
+        )}
+      </div>
     </div>
   );
 };
