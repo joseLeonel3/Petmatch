@@ -1,8 +1,7 @@
 #registerGrade {
-    border: solid red 1px;
     display: flex;
     justify-content: center;
-    height: 580px;
+    height: 680px;
     align-items: center;
 }
 

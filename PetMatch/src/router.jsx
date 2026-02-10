@@ -4,6 +4,8 @@ import DefaultLayout from "./layout/DefaultLayout"
 import Home from "./pages/home/home"
 import Login from "./pages/login/login"
 import Register from "./pages/register/register"
+import Perfil from "./pages/perfil/perfil"
+import PrivateRoute from "./components/PrivateRoute";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +17,15 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route
+            path="/perfil"
+            element={
+              <PrivateRoute>
+                <Perfil />
+              </PrivateRoute>
+            }
+          />
+
         </Route>
 
       </Routes>

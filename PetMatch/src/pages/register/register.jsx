@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../register/register.css";
+import { useRegister } from "../../hooks/useRegister";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -11,18 +13,62 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-import * as React from "react";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const Register = () => {
   const [birthDate, setBirthDate] = React.useState(null);
+  
+  const [email, setEmail] = React.useState("");
+  const [confirmEmail, setConfirmEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  
+  const [nome, setNome] = React.useState("");
+
+  const [perfilPet, setPerfilPet] = React.useState("");
+  const [error, setError] = React.useState("");
+  const { registerUser } = useRegister();
+  
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+  e.preventDefault();
+  setError("");
+
+  if (email !== confirmEmail) {
+    setError("Os emails precisam ser iguais.");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setError("As senhas precisam ser iguais.");
+    return;
+  }
+
+  const result = await registerUser({
+    email,
+    password,
+    perfilPet,
+    birthDate,
+    nome
+  });
+
+  if (!result.success) {
+    setError(result.message);
+    return;
+  }
+
+  navigate("/perfil");
+};
+
 
   return (
     <div id="registerGrade">
       <Box
         id="registerLogin"
         component="form"
+        onSubmit={handleRegister}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -32,39 +78,64 @@ const Register = () => {
       >
         <h1>Register:</h1>
 
-        <div>
-          <p>
-            Have account? <Link to="/Login" id="corsinha">Login</Link>
-          </p>
-        </div>
+        <p>
+          Have account? <Link to="/login" id="corsinha">Login</Link>
+        </p>
 
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <TextField label="Email" type="text" fullWidth />
-          <TextField label="Confirm Email" type="text" fullWidth />
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <TextField
+            label="Nome"
+            required
+            fullWidth
+            onChange={(e) => setNome(e.target.value)}
+          />
         </Box>
 
         <Box sx={{ display: "flex", gap: 2 }}>
-          <TextField label="Senha" type="password" fullWidth />
-          <TextField label="Confirm Senha" type="password" fullWidth />
+          <TextField
+            label="Email"
+            required
+            fullWidth
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            label="Confirm Email"
+            required
+            fullWidth
+            onChange={(e) => setConfirmEmail(e.target.value)}
+          />
         </Box>
 
-        {/* Radio + Data lado a lado */}
-        <Box sx={{ display: "flex", gap: 2, alignItems: "flex-start" }}>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <TextField
+            label="Senha"
+            required
+            type="password"
+            fullWidth
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <TextField
+            label="Confirm Senha"
+            required
+            type="password"
+            fullWidth
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Box>
+
+        <Box sx={{ display: "flex", gap: 2 }} required>
           <FormControl sx={{ flex: 1 }}>
-            <FormLabel id="demo-radio-buttons-group-label">Perfil de Adoção</FormLabel>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
-              <FormControlLabel value="female" control={<Radio />} label="Possui pet" />
-              <FormControlLabel value="male" control={<Radio />} label="Não possui pet" />
+            <FormLabel>Perfil de Adoção</FormLabel>
+            <RadioGroup onChange={(e) => setPerfilPet(e.target.value)}>
+              <FormControlLabel value="possui" control={<Radio />} label="Possui pet" />
+              <FormControlLabel value="nao_possui" control={<Radio />} label="Não possui pet" />
             </RadioGroup>
           </FormControl>
 
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
-              views={["year", "month"]}
+              required
               label="Data de Nascimento"
               value={birthDate}
               onChange={(newValue) => setBirthDate(newValue)}
@@ -73,7 +144,7 @@ const Register = () => {
           </LocalizationProvider>
         </Box>
 
-        <Button variant="contained" sx={{ alignSelf: "flex-center" }}>
+        <Button variant="contained" type="submit" sx={{ alignSelf: "center" }}>
           Enviar
         </Button>
       </Box>

@@ -1,11 +1,16 @@
-import React from 'react'
+import { auth } from "../../data/firebaseConfig";
 
-const perfil = () => {
+const Perfil = () => {
+  const user = auth.currentUser;
+
   return (
-    <>
-        <div>perfil</div>
-    </>
-  )
-}
+    <div>
+      <h1>Perfil</h1>
+      <p>Email: {user?.email}</p>
+      <p>nome: {user?.displayName}</p>
 
-export default perfil
+    </div>
+  );
+};
+
+export default Perfil;
