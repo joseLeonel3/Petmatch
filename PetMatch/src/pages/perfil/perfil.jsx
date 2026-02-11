@@ -57,6 +57,36 @@ const Perfil = () => {
           </p>
         )}
       </div>
+
+      <div>
+        <div id="info_perfil2">
+          <div id="resumo">botafogo</div>
+          <div id="imagem">.</div>
+        </div>
+        <br />
+
+        <div id="petsDono">
+          <div><h3>Meus pets:</h3></div>
+          <br />
+          <div id="GradeImages">
+            <div id="imagem">.</div>
+            <div id="imagem">.</div>
+            <div id="imagem">.</div>
+          </div>
+        </div>
+        <br />
+
+        <div id="petsAdotar">
+          <div><h3>Pets em Adoção:</h3></div>
+          <br />
+          <div id="GradeImages">
+            <div id="imagem">.</div>
+            <div id="imagem">.</div>
+            <div id="imagem">.</div>
+          </div>          
+        </div>
+      </div>
+
     </div>
   );
 };

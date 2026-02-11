@@ -1,6 +1,7 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
 import "../register/register.css";
+
+import { Link, useNavigate } from "react-router-dom";
 import { useRegister } from "../../hooks/useRegister";
 import { Timestamp } from "firebase/firestore";
 

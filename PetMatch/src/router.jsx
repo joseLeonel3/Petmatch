@@ -6,6 +6,7 @@ import Login from "./pages/login/login"
 import Register from "./pages/register/register"
 import Perfil from "./pages/perfil/perfil"
 import PrivateRoute from "./components/PrivateRoute";
+import AdicionarPet from "./pages/adicionarPet/adicionarPet"
 
 const AppRoutes = () => {
   return (
@@ -17,6 +18,8 @@ const AppRoutes = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/AdicionarPet" element={<AdicionarPet />} />
+
           <Route
             path="/perfil"
             element={

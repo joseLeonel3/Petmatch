@@ -70,7 +70,7 @@ const NavbarComponent = () => {
         </li>
 
         <li>
-          <Button component={Link} to="/poremadocao" variant="contained" sx={buttonStyle}>
+          <Button component={Link} to="/AdicionarPet" variant="contained" sx={buttonStyle}>
             Por em adoção
           </Button>
         </li>
