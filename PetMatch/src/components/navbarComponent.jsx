@@ -62,64 +62,66 @@ const NavbarComponent = () => {
         <img src={Logo} id="logo" alt="Logo" />
       </Link>
 
-      <ul>
-        <li>
-          <Button component={Link} to="/adotar" variant="contained" sx={buttonStyle}>
-            Adotar
-          </Button>
-        </li>
+    <ul>
+      <li>
+        <Button component={Link} to="/adotar" variant="contained" sx={buttonStyle}>
+          Adotar
+        </Button>
+      </li>
 
+      {user && (
         <li>
           <Button component={Link} to="/AdicionarPet" variant="contained" sx={buttonStyle}>
             Por em adoção
           </Button>
         </li>
+      )}
 
-        <li>
-          {!user ? (
-            <Button component={Link} to="/login" variant="contained" sx={buttonStyle}>
-              Login
-            </Button>
-          ) : (
-            <>
-              <ButtonGroup
-                variant="contained"
-                ref={anchorRef}
+      <li>
+        {!user ? (
+          <Button component={Link} to="/login" variant="contained" sx={buttonStyle}>
+            Login
+          </Button>
+        ) : (
+          <>
+            <ButtonGroup variant="contained" ref={anchorRef} sx={buttonStyle}>
+              <Button
                 sx={buttonStyle}
+                title={user.displayName || "Conta"}
+                onClick={() => navigate("/perfil")}
               >
-                <Button sx={buttonStyle} title={user.displayName || "Conta"} onClick={() => navigate("/perfil")}>
-                  <AccountCircleIcon/>
-                </Button>
-                <Button sx={buttonStyle} size="small" onClick={handleToggle}>
-                  <ArrowDropDownIcon />
-                </Button>
-              </ButtonGroup>
+                <AccountCircleIcon />
+              </Button>
+              <Button sx={buttonStyle} size="small" onClick={handleToggle}>
+                <ArrowDropDownIcon />
+              </Button>
+            </ButtonGroup>
 
-                <Popper
-                  open={open}
-                  anchorEl={anchorEl}
-                  transition
-                  placement="bottom-end"
-                  disablePortal
-                >
+            <Popper
+              open={open}
+              anchorEl={anchorEl}
+              transition
+              placement="bottom-end"
+              disablePortal
+            >
+              {({ TransitionProps }) => (
+                <Grow {...TransitionProps}>
+                  <Paper>
+                    <ClickAwayListener onClickAway={handleClose}>
+                      <MenuList sx={{ display: "flex", flexDirection: "column" }}>
+                        <MenuItem onClick={handlePerfil}>Perfil</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                      </MenuList>
+                    </ClickAwayListener>
+                  </Paper>
+                </Grow>
+              )}
+            </Popper>
+          </>
+        )}
+      </li>
+    </ul>
 
-                {({ TransitionProps }) => (
-                  <Grow {...TransitionProps}>
-                    <Paper>
-                      <ClickAwayListener onClickAway={handleClose}>
-                        <MenuList autoFocusItem   sx={{display: "flex",flexDirection: "column",}}>
-                          <MenuItem onClick={handlePerfil}>Perfil</MenuItem>
-                          <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        </MenuList>
-                      </ClickAwayListener>
-                    </Paper>
-                  </Grow>
-                )}
-              </Popper>
-            </>
-          )}
-        </li>
-      </ul>
     </nav>
   );
 };

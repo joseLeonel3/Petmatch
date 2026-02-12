@@ -1,5 +1,5 @@
 import { auth, db } from "../data/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export const useRegisterPet = () => {
   const registerPet = async ({
@@ -9,7 +9,7 @@ export const useRegisterPet = () => {
     vacinado,
     vermifugado,
     motivo,
-
+    images, // string[] (URLs)
   }) => {
     try {
       const user = auth.currentUser;
@@ -18,6 +18,14 @@ export const useRegisterPet = () => {
         return { success: false, message: "Usuário não autenticado." };
       }
 
+      if (!images || images.length < 3) {
+        return {
+          success: false,
+          message: "Informe no mínimo 3 URLs de imagens.",
+        };
+      }
+
+      // 🔹 cria o pet JÁ com as URLs
       const petRef = await addDoc(collection(db, "pets"), {
         nome,
         tipoPet,
@@ -25,8 +33,9 @@ export const useRegisterPet = () => {
         vacinado,
         vermifugado,
         motivo,
+        images, // ✅ URLs salvas direto
         userId: user.uid,
-        createdAt: new Date(),
+        createdAt: serverTimestamp(),
       });
 
       return { success: true, petId: petRef.id };
