@@ -1,0 +1,128 @@
+#adota_Grade {
+  width: 95%;
+  min-height: 900px;
+  margin: 30px auto 50px auto;
+  background-color: #FFFFFF;
+}
+
+#menu_PetPage {
+  height: 80px;
+  background-color: #D98C9A;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+}
+
+#grade_Cart {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  justify-items: center;
+}
+
+.Cart {
+  width: 250px;
+  height: 320px;
+  border-radius: 6px;
+  background-color: #ebebeb;
+  border: solid rgb(216, 216, 216) 1px;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0;
+}
+
+.Cart:hover {
+  transform: translateY(-5px);
+  transition: 0.3s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+.img_Pet {
+  width: 180px;
+  height: 180px;
+  margin-top: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.img_Pet img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pet_Name {
+  margin-top: auto; 
+  width: 100%;
+  height: 90px;
+  background-color: #D98C9A;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 0 0 6px 6px;
+}
+
+.pet_Name h2 {
+  color: white;
+  font-size: 18px;
+  text-align: center;
+}
+
+#menu_PetPage {
+  height: 80px;
+  background-color: #D98C9A;
+  margin-bottom: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu_container {
+  display: flex;
+  gap: 20px;
+}
+
+.menu_select {
+  background-color: white;
+  border-radius: 6px;
+  width: 150px;
+}
+
+/* força fundo branco no MUI */
+.menu_select .MuiOutlinedInput-root {
+  background-color: white;
+}
+
+/* label */
+.menu_select .MuiInputLabel-root {
+  color: #555;
+}
+
+/* texto selecionado */
+.menu_select .MuiSelect-select {
+  color: #000;
+}
+
+/* borda normal */
+.menu_select .MuiOutlinedInput-notchedOutline {
+  border-color: #ccc;
+}
+
+/* hover */
+.menu_select:hover .MuiOutlinedInput-notchedOutline {
+  border-color: #999;
+}
+
+/* focus */
+.menu_select.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #D98C9A;
+}

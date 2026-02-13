@@ -64,7 +64,7 @@ const NavbarComponent = () => {
 
     <ul>
       <li>
-        <Button component={Link} to="/adotar" variant="contained" sx={buttonStyle}>
+        <Button component={Link} to="/PetPages" variant="contained" sx={buttonStyle}>
           Adotar
         </Button>
       </li>
