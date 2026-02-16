@@ -8,6 +8,8 @@ import Perfil from "./pages/perfil/perfil"
 import PrivateRoute from "./components/PrivateRoute";
 import AdicionarPet from "./pages/adicionarPet/adicionarPet"
 import PetPages from "./pages/petPage/petPages"
+import AdocaoPage from "./pages/adocaoPage/adocaoPage"
+
 
 const AppRoutes = () => {
   return (
@@ -21,6 +23,7 @@ const AppRoutes = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/AdicionarPet" element={<AdicionarPet />} />
           <Route path="/PetPages" element={<PetPages />} />
+          <Route path="/adocaoPage" element={<AdocaoPage />} />
 
           <Route
             path="/perfil"

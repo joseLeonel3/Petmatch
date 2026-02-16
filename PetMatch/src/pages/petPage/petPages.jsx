@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import "./petPages.css";
 import { db } from "../../data/firebaseConfig";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -63,6 +64,7 @@ const PetPages = () => {
 
   return (
     <div id="adota_Grade">
+      {/* MENU */}
       <div id="menu_PetPage">
         <Box className="menu_container">
           <FormControl className="menu_select">
@@ -92,20 +94,29 @@ const PetPages = () => {
         </Box>
       </div>
 
+      {/* CARDS */}
       <div id="grade_Cart">
         {currentPets.map((pet) => (
-          <div className="Cart" key={pet.id}>
-            <div className="img_Pet">
-              <img src={pet.images?.[0]} alt={pet.nome} />
-            </div>
+          <Link
+            key={pet.id}
+            to="/adocaoPage"
+            state={{ pet }}
+            className="link_pet"
+          >
+            <div className="Cart">
+              <div className="img_Pet">
+                <img src={pet.images?.[0]} alt={pet.nome} />
+              </div>
 
-            <div className="pet_Name">
-              <h2>{pet.nome}</h2>
+              <div className="pet_Name">
+                <h2>{pet.nome}</h2>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
 
+      {/* PAGINAÇÃO */}
       {totalPages > 1 && (
         <div className="pagination">
           {Array.from({ length: totalPages }).map((_, index) => (

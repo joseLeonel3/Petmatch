@@ -1,0 +1,64 @@
+#adocaoGrade{
+    border: solid red 1px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px 20px;
+}
+
+#petImg{
+    height: 300px;
+    width: 250px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    -webkit-box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21); 
+    box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21);
+
+}
+
+#infoPet{
+    width: 980px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    -webkit-box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21); 
+    box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21);
+}
+
+.slider {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  -webkit-box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21); 
+  box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21);
+}
+
+.slider img {
+  width: 90%;
+  height: 90%;
+  margin-left: 5%;
+  margin-top: 15px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 22px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.slider-btn.left {
+  left: 10px;
+}
+
+.slider-btn.right {
+  right: 10px;
+}
