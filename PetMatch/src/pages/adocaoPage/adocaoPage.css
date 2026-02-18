@@ -62,3 +62,43 @@
 .slider-btn.right {
   right: 10px;
 }
+
+#donoPet{
+    width: 980px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    -webkit-box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21); 
+    box-shadow: -4px 7px 21px -1px rgba(0,0,0,0.21);
+}
+
+#infoEspeciPet{
+  display: flex;
+  justify-content: space-between;
+}
+
+#infoEspeciPet strong{
+  font-size: 20px;
+
+}
+
+.donoCard {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.donoAvatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.donoInfo {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+}

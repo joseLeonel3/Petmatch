@@ -132,6 +132,7 @@ const Perfil = () => {
       <div>
         <div id="info_perfil2">
           <div id="resumo">
+          <h2>about me</h2><br />
             {aboutMe || "Nenhuma descrição adicionada"}
           </div>
 
@@ -142,14 +143,18 @@ const Perfil = () => {
 
         <br />
 
-        <div id="petsDono">
-          <h3>Meus pets:</h3>
-          <div id="GradeImages">
-            {petImages.map((img, index) => (
-              <img key={index} src={img} alt="pet" />
-            ))}
+        {petImages.length === 0 ? (
+          <p style={{ opacity: 0.7 }}>Você ainda não adicionou pets 🐾</p>
+        ) : (
+          <div id="petsDono">
+            <h3>Meus pets:</h3>
+            <div id="GradeImages">
+              {petImages.map((img, index) => (
+                <img key={index} src={img} alt="pet" />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* ===================== MODAL ===================== */}

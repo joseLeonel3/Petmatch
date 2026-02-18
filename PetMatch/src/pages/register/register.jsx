@@ -27,6 +27,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   
   const [nome, setNome] = React.useState("");
+  const [nmrContato, setnmrContato] = React.useState("");
 
   const [perfilPet, setPerfilPet] = React.useState("");
   const [error, setError] = React.useState("");
@@ -63,7 +64,8 @@ const Register = () => {
     password,
     perfilPet,
     birthDate: Timestamp.fromDate(birthDate),
-    nome
+    nome,
+    nmrContato
   });
 
   if (!result.success) {
@@ -135,6 +137,17 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Box>
+
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <TextField
+            label="Número de contato"
+            required
+            fullWidth
+            placeholder="(11) 99999-9999"
+            value={nmrContato}
+            onChange={(e) => setnmrContato(e.target.value)}
+          />
+        </Box>  
 
         <Box sx={{ display: "flex", gap: 2 }} required>
           <FormControl sx={{ flex: 1 }} error={!perfilPet && !!error}>

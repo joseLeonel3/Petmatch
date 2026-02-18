@@ -9,7 +9,8 @@ export const useRegisterPet = () => {
     vacinado,
     vermifugado,
     motivo,
-    images, // string[] (URLs)
+    images,
+    nmrContato
   }) => {
     try {
       const user = auth.currentUser;
@@ -25,7 +26,6 @@ export const useRegisterPet = () => {
         };
       }
 
-      // 🔹 cria o pet JÁ com as URLs
       const petRef = await addDoc(collection(db, "pets"), {
         nome,
         tipoPet,
@@ -33,7 +33,8 @@ export const useRegisterPet = () => {
         vacinado,
         vermifugado,
         motivo,
-        images, // ✅ URLs salvas direto
+        images,
+        nmrContato,
         userId: user.uid,
         createdAt: serverTimestamp(),
       });
