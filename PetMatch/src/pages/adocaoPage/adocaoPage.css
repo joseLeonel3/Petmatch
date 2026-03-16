@@ -1,5 +1,4 @@
 #adocaoGrade{
-    border: solid red 1px;
     display: flex;
     width: 100%;
     justify-content: space-between;
@@ -101,4 +100,13 @@
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
+}
+#botaoChatGrade{
+    width: 500px;
+    display: flex;
+    justify-self: center;
+
+}
+#botaoChat{
+
 }

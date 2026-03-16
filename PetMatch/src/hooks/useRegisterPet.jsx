@@ -10,7 +10,7 @@ export const useRegisterPet = () => {
     vermifugado,
     motivo,
     images,
-    nmrContato
+    
   }) => {
     try {
       const user = auth.currentUser;
@@ -34,7 +34,6 @@ export const useRegisterPet = () => {
         vermifugado,
         motivo,
         images,
-        nmrContato,
         userId: user.uid,
         createdAt: serverTimestamp(),
       });

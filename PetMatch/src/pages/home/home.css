@@ -1,3 +1,9 @@
-#test{
-    height: 800px;
+.slideCardGrade{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+#cartsGrade{
+    width: 95%;
 }

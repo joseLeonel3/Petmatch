@@ -49,7 +49,6 @@ const Perfil = () => {
         updatedAt: new Date(),
       });
 
-      // atualiza UI após salvar
       setAboutMe(tempAboutMe);
       setProfileImage(tempProfileImage);
       setPetImages(tempPetImages);
@@ -96,10 +95,10 @@ const Perfil = () => {
     setTempPetImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  /* ===================== JSX ===================== */
+
   return (
     <div id="perfil_grade">
-      {/* SIDEBAR */}
+
       <div id="info_perfil">
         <div id="perfil_img">
           {profileImage ? (
@@ -128,7 +127,6 @@ const Perfil = () => {
         </button>
       </div>
 
-      {/* CONTEÚDO */}
       <div>
         <div id="info_perfil2">
           <div id="resumo">
@@ -157,7 +155,7 @@ const Perfil = () => {
         )}
       </div>
 
-      {/* ===================== MODAL ===================== */}
+
       {openEdit && (
         <div className="modal-overlay">
           <div className="modal">

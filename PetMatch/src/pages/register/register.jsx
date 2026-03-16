@@ -19,63 +19,63 @@ import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { registerUser } = useRegister();
+
   const [birthDate, setBirthDate] = React.useState(null);
-  
+
   const [email, setEmail] = React.useState("");
   const [confirmEmail, setConfirmEmail] = React.useState("");
+
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  
+
   const [nome, setNome] = React.useState("");
-  const [nmrContato, setnmrContato] = React.useState("");
+  const [nmrContato, setNmrContato] = React.useState("");
 
   const [perfilPet, setPerfilPet] = React.useState("");
   const [error, setError] = React.useState("");
-  const { registerUser } = useRegister();
-  
-  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
-  e.preventDefault();
-  setError("");
+    e.preventDefault();
+    setError("");
 
-  if (email !== confirmEmail) {
-    setError("Os emails precisam ser iguais.");
-    return;
-  }
+    if (email !== confirmEmail) {
+      setError("Os emails precisam ser iguais.");
+      return;
+    }
 
-  if (password !== confirmPassword) {
-    setError("As senhas precisam ser iguais.");
-    return;
-  }
+    if (password !== confirmPassword) {
+      setError("As senhas precisam ser iguais.");
+      return;
+    }
 
-  if (!perfilPet) {
-  setError("Selecione se você possui pet ou não.");
-  return;
-  }
+    if (!perfilPet) {
+      setError("Selecione se você possui pet ou não.");
+      return;
+    }
 
-  if (!birthDate) {
-    setError("Informe sua data de nascimento.");
-    return;
-  }
+    if (!birthDate) {
+      setError("Informe sua data de nascimento.");
+      return;
+    }
 
-  const result = await registerUser({
-    email,
-    password,
-    perfilPet,
-    birthDate: Timestamp.fromDate(birthDate),
-    nome,
-    nmrContato
-  });
+    const result = await registerUser({
+      email,
+      password,
+      nome,
+      perfilPet,
+      nmrContato,
+      birthDate: Timestamp.fromDate(new Date(birthDate)),
+    });
 
-  if (!result.success) {
-    setError(result.message);
-    return;
-  }
+    if (!result.success) {
+      setError(result.message);
+      return;
+    }
 
-  navigate("/perfil");
-};
-
+    navigate("/perfil");
+  };
 
   return (
     <div id="registerGrade">
@@ -97,26 +97,28 @@ const Register = () => {
         </p>
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <TextField
-            label="Nome"
-            required
-            fullWidth
-            onChange={(e) => setNome(e.target.value)}
-          />
-        </Box>
+
+        <TextField
+          label="Nome"
+          required
+          fullWidth
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+        />
 
         <Box sx={{ display: "flex", gap: 2 }}>
           <TextField
             label="Email"
             required
             fullWidth
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             label="Confirm Email"
             required
             fullWidth
+            value={confirmEmail}
             onChange={(e) => setConfirmEmail(e.target.value)}
           />
         </Box>
@@ -127,6 +129,7 @@ const Register = () => {
             required
             type="password"
             fullWidth
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <TextField
@@ -134,25 +137,27 @@ const Register = () => {
             required
             type="password"
             fullWidth
+            value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </Box>
 
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <TextField
-            label="Número de contato"
-            required
-            fullWidth
-            placeholder="(11) 99999-9999"
-            value={nmrContato}
-            onChange={(e) => setnmrContato(e.target.value)}
-          />
-        </Box>  
+        <TextField
+          label="Número de contato"
+          required
+          fullWidth
+          placeholder="(11) 99999-9999"
+          value={nmrContato}
+          onChange={(e) => setNmrContato(e.target.value)}
+        />
 
-        <Box sx={{ display: "flex", gap: 2 }} required>
-          <FormControl sx={{ flex: 1 }} error={!perfilPet && !!error}>
-            <FormLabel required>Perfil de Adoção</FormLabel>
-            <RadioGroup onChange={(e) => setPerfilPet(e.target.value)}>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <FormControl sx={{ flex: 1 }}>
+            <FormLabel>Perfil de Adoção</FormLabel>
+            <RadioGroup
+              value={perfilPet}
+              onChange={(e) => setPerfilPet(e.target.value)}
+            >
               <FormControlLabel value="possui" control={<Radio />} label="Possui pet" />
               <FormControlLabel value="nao_possui" control={<Radio />} label="Não possui pet" />
             </RadioGroup>
@@ -166,10 +171,7 @@ const Register = () => {
               slotProps={{
                 textField: {
                   required: true,
-                  error: !birthDate && !!error,
-                  helperText: !birthDate && !!error ? "Data obrigatória" : "",
-                  fullWidth: false
-                }
+                },
               }}
             />
           </LocalizationProvider>

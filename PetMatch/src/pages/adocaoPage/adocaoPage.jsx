@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../adocaoPage/adocaoPage.css";
+import {
+  Typography,
+  Button
+} from "@mui/material";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../data/firebaseConfig";
@@ -16,7 +20,7 @@ const AdocaoPage = () => {
 
 useEffect(() => {
   const fetchDono = async () => {
-    if (!pet?.userId) return;
+    if (!pet?.userId) return; 
 
     try {
       const docRef = doc(db, "users", pet.userId);
@@ -61,6 +65,15 @@ useEffect(() => {
     );
   };
 
+
+
+const abrirChat = () => {
+
+  const chatId = "123"; // depois você gera dinamicamente
+
+  navigate(`/chat/${chatId}`);
+};
+
   return (
     <div id="adocaoGrade">
 
@@ -94,31 +107,46 @@ useEffect(() => {
 
         </div>
 
-        {dono && (
-          <div id="donoPet">
-            <h2>Dono do Pet</h2>
+<div id="donoPet">
+  <h2>Dono do Pet</h2>
 
-            <div className="donoCard">
-              <img
-                src={dono.profileImage || "/avatar.png"}
-                alt="Dono"
-                className="donoAvatar"
-              />
+  {dono ? (
+    <div className="donoCard">
+      <img
+        src={dono.profileImage || "/avatar.png"}
+        alt="Dono"
+        className="donoAvatar"
+      />
 
-              <div className="donoInfo">
-                <p><h4>Nome:</h4> {dono.nome}</p>
-                <p>
-                  <h4>Possui pet:</h4>{" "}
-                  {dono.perfilPet === "possui" ? "Sim" : "Não"}
-                </p>
-                <p>
-                  <h4>numero de contato:</h4>{" "}
-                  {dono.nmrContato || "Não informado"}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
+      <div className="donoInfo">
+        <p><strong>Nome:</strong> {dono.nome}</p>
+        <p>
+          <strong>Possui pet:</strong>{" "}
+          {dono.perfilPet === "possui" ? "Sim" : "Não"}
+        </p>
+        <p>
+          <strong>Número de contato:</strong>{" "}
+          {dono.nmrContato || "Não informado"}
+        </p>
+      </div>
+    </div>
+  ) : (
+    <p>Carregando dono...</p>
+  )}
+
+  <div id="botaoChatGrade">
+    <Button
+      fullWidth
+      variant="contained"
+      sx={{ backgroundColor: "#366e2f" }}
+      onClick={abrirChat}
+    >
+      Conversar com dono
+    </Button>
+  </div>
+</div>
+
+
       </div>
     </div>
   );

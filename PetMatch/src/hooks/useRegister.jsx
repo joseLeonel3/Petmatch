@@ -3,7 +3,14 @@ import { auth, db } from "../data/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 
 export const useRegister = () => {
-  const registerUser = async ({ email, password, nome, perfilPet, birthDate }) => {
+  const registerUser = async ({
+    email,
+    password,
+    nome,
+    perfilPet,
+    birthDate,
+    nmrContato
+  }) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -13,17 +20,16 @@ export const useRegister = () => {
 
       const user = userCredential.user;
 
-      // ✅ CORREÇÃO: salva o nome no Auth
       await updateProfile(user, {
         displayName: nome,
       });
 
-      // salva no Firestore
       await setDoc(doc(db, "users", user.uid), {
         nome,
         email,
         perfilPet,
         birthDate,
+        nmrContato,
         createdAt: new Date(),
       });
 

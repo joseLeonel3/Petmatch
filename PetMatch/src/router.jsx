@@ -9,22 +9,23 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdicionarPet from "./pages/adicionarPet/adicionarPet"
 import PetPages from "./pages/petPage/petPages"
 import AdocaoPage from "./pages/adocaoPage/adocaoPage"
-
+import Chat from "./pages/chat/chat"
 
 const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* LAYOUT ÚNICO PARA TODAS AS ROTAS */}
         <Route element={<DefaultLayout />}>
+
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/AdicionarPet" element={<AdicionarPet />} />
           <Route path="/PetPages" element={<PetPages />} />
           <Route path="/adocaoPage" element={<AdocaoPage />} />
-
+          <Route path="/chat/:chatId" element={<Chat />} />
+          
           <Route
             path="/perfil"
             element={
@@ -37,6 +38,7 @@ const AppRoutes = () => {
         </Route>
 
       </Routes>
+      
     </BrowserRouter>
   )
 }
