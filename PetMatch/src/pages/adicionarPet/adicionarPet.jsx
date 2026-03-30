@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterPet } from "../../hooks/useRegisterPet";
 import { auth } from "../../data/firebaseConfig";
 
-// MUI
 import {
   TextField,
   Button,
@@ -22,7 +21,6 @@ const AdicionarPet = () => {
   const { registerPet } = useRegisterPet();
   const user = auth.currentUser;
 
-  // Estados
   const [nome, setNome] = useState("");
   const [tipoPet, setTipoPet] = useState("");
   const [idadePet, setIdadePet] = useState("");
@@ -32,7 +30,6 @@ const AdicionarPet = () => {
   const [images, setImages] = useState(["", "", ""]);
   const [error, setError] = useState("");
 
-  // Helpers
   const isValidImageUrl = (url) =>
     /^https?:\/\/.+\.(jpg|jpeg|png|webp)$/i.test(url);
 
@@ -43,8 +40,6 @@ const AdicionarPet = () => {
       return copy;
     });
   };
-
-  // Submit
   const handleRegisterPet = async (e) => {
     e.preventDefault();
     setError("");
@@ -124,7 +119,6 @@ const AdicionarPet = () => {
           onChange={(e) => setNome(e.target.value)}
         />
 
-        {/* Tipo e idade */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <FormControl sx={{ flex: 1 }}>
             <FormLabel required>Tipo</FormLabel>
@@ -144,7 +138,6 @@ const AdicionarPet = () => {
           </FormControl>
         </Box>
 
-        {/* Vacinas */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <FormControl sx={{ flex: 1 }}>
             <FormLabel required>Vacinado?</FormLabel>
@@ -163,7 +156,6 @@ const AdicionarPet = () => {
           </FormControl>
         </Box>
 
-        {/* Motivo */}
         <TextareaAutosize
           minRows={4}
           placeholder="Descreva o motivo para cadastro / adoção (mín. 200 caracteres)"
@@ -187,7 +179,6 @@ const AdicionarPet = () => {
           {motivo.length}/200 caracteres
         </p>
 
-        {/* Imagens */}
         {images.map((img, index) => (
           <Box key={index} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
             <TextField

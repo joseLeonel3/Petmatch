@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../adocaoPage/adocaoPage.css";
+import { auth } from "../../data/firebaseConfig";
+import { generateChatId } from "../chat/chat";
+
 import {
   Typography,
   Button
@@ -68,10 +71,25 @@ useEffect(() => {
 
 
 const abrirChat = () => {
+  const user = auth.currentUser;
 
-  const chatId = "123"; // depois você gera dinamicamente
+  if (!user || !pet?.userId || !pet?.id) {
+    console.log("Dados inválidos pro chat");
+    return;
+  }
 
-  navigate(`/chat/${chatId}`);
+  const ids = [pet.userId, user.uid].sort();
+
+  const chatId = `${ids[0]}_${ids[1]}_${pet.id}`;
+
+  console.log("Indo para chat:", chatId);
+
+  navigate(`/chat/${chatId}`, {
+    state: { pet }
+  });
+
+  console.log("Usuário logado:", user.uid);
+  console.log("Dono do pet:", pet.userId);
 };
 
   return (
@@ -145,8 +163,6 @@ const abrirChat = () => {
     </Button>
   </div>
 </div>
-
-
       </div>
     </div>
   );

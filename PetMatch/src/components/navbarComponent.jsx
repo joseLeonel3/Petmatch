@@ -102,7 +102,7 @@ const NavbarComponent = () => {
               anchorEl={anchorEl}
               transition
               placement="bottom-end"
-              disablePortal
+                sx={{ zIndex: 9999 }}
             >
               {({ TransitionProps }) => (
                 <Grow {...TransitionProps}>

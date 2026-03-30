@@ -1,0 +1,33 @@
+#caixaTexto{
+    display:flex; 
+    gap: 10px; 
+    margin-top: 10px;
+}
+
+
+#caixaTexto input{
+    padding: 10px 5px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+
+#chatbtn{
+    background-color: rgb(10, 173, 18);
+    padding: 5px 20px;
+    cursor: pointer;
+    border: 2px solid rgb(10, 173, 18);
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+#chatbtn:hover{
+    background-color: 2px solid rgb(16, 172, 24);
+    padding: 5px 20px;
+    cursor: pointer;
+    border: 2px solid rgb(62, 139, 38);
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+}

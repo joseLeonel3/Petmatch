@@ -1,17 +1,19 @@
 import { useState } from "react";
+import "../components/ChatInput.css";
 
 const ChatInput = ({ sendMessage }) => {
   const [text, setText] = useState("");
 
   const handleSend = () => {
+    if (!text.trim()) return;
+
     sendMessage(text);
     setText("");
   };
 
   return (
-    <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
+    <div id="caixaTexto">
       <input
-        style={{ flex: 1 }}
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Digite uma mensagem..."

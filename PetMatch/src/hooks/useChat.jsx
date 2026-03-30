@@ -3,10 +3,10 @@ import { db, auth } from "../data/firebaseConfig";
 import {
   collection,
   addDoc,
-  serverTimestamp,
   query,
   orderBy,
-  onSnapshot
+  onSnapshot,
+  serverTimestamp
 } from "firebase/firestore";
 
 export const useChat = (chatId) => {
@@ -17,7 +17,7 @@ export const useChat = (chatId) => {
 
     const q = query(
       collection(db, "chats", chatId, "messages"),
-      orderBy("createdAt")
+      orderBy("createdAt", "asc")
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -35,7 +35,7 @@ export const useChat = (chatId) => {
   const sendMessage = async (text) => {
     const user = auth.currentUser;
 
-    if (!text.trim()) return;
+    if (!text.trim() || !user) return;
 
     await addDoc(collection(db, "chats", chatId, "messages"), {
       text,
