@@ -10,6 +10,7 @@ import AdicionarPet from "./pages/adicionarPet/adicionarPet"
 import PetPages from "./pages/petPage/petPages"
 import AdocaoPage from "./pages/adocaoPage/adocaoPage"
 import Chat from "./pages/chat/chat"
+import Notificacoes from "./pages/notificacoes/notificacoes"
 
 const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
           <Route path="/PetPages" element={<PetPages />} />
           <Route path="/adocaoPage" element={<AdocaoPage />} />
           <Route path="/chat/:chatId" element={<Chat />} />
+          <Route path="/notificacoes" element={<Notificacoes />} />
           
           <Route
             path="/perfil"

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../adocaoPage/adocaoPage.css";
 import { auth } from "../../data/firebaseConfig";
-import { generateChatId } from "../chat/chat";
+import { generateChatId } from "../chat/utils/chatUtils";
 
 import {
   Typography,
@@ -74,24 +74,30 @@ const abrirChat = () => {
   const user = auth.currentUser;
 
   if (!user || !pet?.userId || !pet?.id) {
-    console.log("Dados inválidos pro chat");
+    console.log("❌ Dados inválidos:", {
+      user: user?.uid,
+      dono: pet?.userId,
+      petId: pet?.id
+    });
     return;
   }
 
-  const ids = [pet.userId, user.uid].sort();
+  const chatId = generateChatId(
+    String(user.uid),
+    String(pet.userId),
+    String(pet.id)
+  );
 
-  const chatId = `${ids[0]}_${ids[1]}_${pet.id}`;
-
-  console.log("Indo para chat:", chatId);
+  console.log("✅ CHAT DEBUG:");
+  console.log("user:", user.uid);
+  console.log("dono:", pet.userId);
+  console.log("petId:", pet.id);
+  console.log("chatId:", chatId);
 
   navigate(`/chat/${chatId}`, {
     state: { pet }
   });
-
-  console.log("Usuário logado:", user.uid);
-  console.log("Dono do pet:", pet.userId);
 };
-
   return (
     <div id="adocaoGrade">
 

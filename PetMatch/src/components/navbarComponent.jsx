@@ -14,6 +14,10 @@ import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Badge from "@mui/material/Badge";
+import { useNotifications } from "../hooks/useNotifications";
+
 import { useAuth } from "../hooks/userAuth";
 import { useLogout } from "../hooks/useLogout";
 
@@ -22,6 +26,8 @@ const NavbarComponent = () => {
   const { logout } = useLogout();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  
+  const { notifications } = useNotifications();
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -77,6 +83,20 @@ const NavbarComponent = () => {
         </li>
       )}
 
+      {user && (
+        <li>
+          <Button
+            variant="contained"
+            sx={buttonStyle}
+            onClick={() => navigate("/notificacoes")}
+          >
+            <Badge badgeContent={notifications.length} color="error">
+              <NotificationsIcon />
+            </Badge>
+          </Button>
+        </li>
+      )}
+      
       <li>
         {!user ? (
           <Button component={Link} to="/login" variant="contained" sx={buttonStyle}>
