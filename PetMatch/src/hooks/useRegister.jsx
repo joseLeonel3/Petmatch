@@ -1,8 +1,17 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile
+} from "firebase/auth";
+
 import { auth, db } from "../data/firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+
+import {
+  doc,
+  setDoc
+} from "firebase/firestore";
 
 export const useRegister = () => {
+
   const registerUser = async ({
     email,
     password,
@@ -11,35 +20,44 @@ export const useRegister = () => {
     birthDate,
     nmrContato
   }) => {
+
     try {
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        email,
+        email.trim(),
         password
       );
 
       const user = userCredential.user;
 
       await updateProfile(user, {
-        displayName: nome,
+        displayName: nome
       });
 
       await setDoc(doc(db, "users", user.uid), {
         nome,
-        email,
+        email: email.trim(),
         perfilPet,
         birthDate,
         nmrContato,
-        createdAt: new Date(),
+        createdAt: new Date()
       });
 
       return { success: true };
-    } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        return { success: false, message: "Este email já está cadastrado." };
-      }
 
-      return { success: false, message: "Erro ao criar conta." };
+    } catch (error) {
+
+      console.error("ERRO FIREBASE:", error);
+      console.error("CÓDIGO:", error.code);
+      console.error("MENSAGEM:", error.message);
+
+      return {
+        success: false,
+        message: error.message,
+        code: error.code
+      };
+
     }
   };
 

@@ -50,6 +50,11 @@ const Register = () => {
       return;
     }
 
+    if (password.length < 6) {
+      setError("A senha precisa ter pelo menos 6 caracteres.");
+      return;
+    }
+
     if (!perfilPet) {
       setError("Selecione se você possui pet ou não.");
       return;
@@ -128,6 +133,7 @@ const Register = () => {
             label="Senha"
             required
             type="password"
+            inputProps={{ minLength: 6 }}
             fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}

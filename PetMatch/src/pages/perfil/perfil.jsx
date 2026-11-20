@@ -83,7 +83,6 @@ const Perfil = () => {
     fetchUserData();
   }, [user]);
 
-  /* ===================== PET IMAGES ===================== */
   const handleAddPetImage = () => {
     if (!petImageUrl.trim()) return;
 

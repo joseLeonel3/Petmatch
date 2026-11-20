@@ -3,11 +3,18 @@
   padding: 0;
   box-sizing: border-box;
 }
-@font-face {
-  font-family: 'SfPro';
-  src: url('../src/images/SF-Pro.dmg') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+
+html, body, #root {
+  min-height: 100vh; /* ou 100dvh */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* ocupa o espaço livre e empurra o footer */
 }
 
 body {
@@ -15,5 +22,12 @@ body {
   background-color: #FFF1E6;
   font-family: SfPro, sans-serif;
 }
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-
+.main {
+  flex: 1;
+}
